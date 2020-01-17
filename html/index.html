@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Ajax Jquery Api</title>
+</head>
+
+<body>
+
+    <!--! Menu Navbar des API -->
+
+    <section>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">API</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="#">Accueil <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="#">Bières</a>
+                </div>
+            </div>
+        </nav>
+        <div>
+            <h1>Les Bières</h1>
+        </div>
+
+        <button type="button" class="btn btn-dark" id="aff">Afficher la liste</button>
+
+        <!--! Bouton avec modal Bootstrap pour créer de nouvelle bières (en ajouter) dans le tableau. -->
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ajouter" id="ajout">Ajouter une Bière</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="ajouter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ajouter une bières</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formul2">
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="id22">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Nom</label>
+                                <input type="text" class="form-control" id="name2">
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Pays</label>
+                                <input type="text" class="form-control" id="country2">
+                            </div>
+                            <div class="form-group">
+                                <label for="degrees">Degrés</label>
+                                <input type="text" class="form-control" id="degrees2">
+                            </div>
+                            <div class="form-group">
+                                <label for="bitterness">Amertume</label>
+                                <input type="text" class="form-control" id="bitterness2">
+                            </div>
+                            <div class="form-group">
+                                <label for="color">Couleur</label>
+                                <input type="text" class="form-control" id="color2">
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Prix</label>
+                                <input type="text" class="form-control" id="price2">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" id="plus">Ajouter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--! Bouton avec modal Bootstrap pour trier par pays, couleur et degrés les bièeres que l'on veut déguster. -->
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#example">Trier</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="example" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Trie des bières</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formul3">
+                            <div class="form-group">
+                                <label for="country">Pays</label>
+                                <input type="text" class="form-control" id="country3">
+                            </div>
+                            <div class="form-group">
+                                <label for="degrees">Degrés</label>
+                                <input type="text" class="form-control" id="degrees3">
+                            </div>
+                            <div class="form-group">
+                                <label for="color">Couleur</label>
+                                <input type="text" class="form-control" id="color3">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal" id="triage">Trier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--! Tableau de la liste des bières avec le bouton "info" ainsi que le modal de Bootstrap pour afficher toutes les bières pour les Modifier ou les supprimer. -->
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">NOM</th>
+                    <th scope="col">+ de détails</th>
+                </tr>
+            </thead>
+            <tbody id="tab">
+            </tbody>
+        </table>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Détails</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formul">
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="id2">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Nom</label>
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Pays</label>
+                                <input type="text" class="form-control" id="country">
+                            </div>
+                            <div class="form-group">
+                                <label for="degrees">Degrés</label>
+                                <input type="text" class="form-control" id="degrees">
+                            </div>
+                            <div class="form-group">
+                                <label for="bitterness">Amertume</label>
+                                <input type="text" class="form-control" id="bitterness">
+                            </div>
+                            <div class="form-group">
+                                <label for="color">Couleur</label>
+                                <input type="text" class="form-control" id="color">
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Prix</label>
+                                <input type="text" class="form-control" id="price">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-info" id="modif" data-dismiss="modal">Modifier</button>
+                        <button type="submit" class="btn btn-danger" id="sup" data-dismiss="modal">Supprimer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="../vendor/jquery-3.4.1.min.js"></script>
+    <script src="../vendor/bootstrap.min.js"></script>
+    <script src="../js/js.js"></script>
+</body>
+
+</html>
